@@ -1,0 +1,42 @@
+﻿
+    <h3>New Product</h3>
+    <ul>
+        <li ng-repeat="error in controller.validationErrors track by $index" class="usrError">
+            {{error}}
+        </li>
+    </ul>
+
+    <form name="productForm" ng-submit="controller.save()" class="form-group">
+        <div>
+            <label>Name:</label>
+            <input name="name" ng-model="controller.product.name" type="text" class="form-control" placeholder="Enter a Product Name" required/>
+            <span ng-show="productForm.name.$touched && productForm.name.$error.required" class="error">
+                Product Name is required.
+            </span>
+        </div>
+
+        <div>
+            <label>Description:</label>
+            <textarea name="description" ng-maxlength="500" rows="4" cols="50" ng-model="controller.product.description" class="form-control" placeholder="Enter any detail for the Product" required></textarea>
+            <span ng-show="productForm.description.$touched && productForm.description.$error.required" class="error">
+                Description is required.
+            </span>
+            <span ng-show="productForm.description.$touched && productForm.description.$error.maxlength" class="error">
+                Description longitud must be until 500 characters.
+            </span>
+        </div>
+        <div>
+            <label>Unit:</label>
+            <select name="repeatSelect" id="repeatSelect" ng-model="controller.product.unit" class="form-control" required>
+                <option ng-repeat="option in controller.units track by option.id" value="{{option.id}}">{{option.name}}</option>
+            </select>
+            <span ng-show="productForm.repeatSelect.$touched && productForm.repeatSelect.$error.required" class="error">
+                Unit is required.
+            </span>
+        </div>
+        <hr />
+        <div>
+            <input type="submit" value="Add" class="btn-primary btn" ng-disabled="productForm.$invalid"/>
+            <input type="button" value="Cancel" class="btn-default btn" ng-click="controller.cancelForm()"/>
+        </div>
+    </form>

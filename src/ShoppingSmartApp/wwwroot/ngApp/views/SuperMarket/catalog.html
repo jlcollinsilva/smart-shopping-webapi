@@ -1,0 +1,31 @@
+﻿<h4>
+    Catalog for SuperMarket: <strong>{{controller.supermarket.name}} - {{controller.supermarket.city}} - {{controller.supermarket.state}}</strong>
+</h4>
+<hr />
+
+<div class="inner-addon left-addon">
+    <i class="glyphicon glyphicon-search"></i>
+    <input type="text" class="form-control" ng-model="searchText" ng-model-options="{debounce:1000}" placeholder="Search Product in Catalog" />
+</div>
+<br />
+<a ng-click="controller.goAddCatalog(controller.supermarket.id)" 
+                            class="btn btn-sm btn-info"><span class="glyphicon glyphicon-book"></span>Add Products To Catalog</a>
+
+<hr/>
+<table class="table table-striped table-hover table-responsive">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Price</td>
+            <td>Actions</td>
+        </tr>
+    </thead>
+    <tr ng-repeat="p in controller.productcatalogs |filter:{productName:searchText}">
+        <td>{{p.productName}}</td>
+        <td>{{p.productPrice|currency}}</td>
+        <td>
+            <a ng-click="controller.deleteProductCatalog(p.productCatalogId)"
+               class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+        </td>
+    </tr>
+</table>

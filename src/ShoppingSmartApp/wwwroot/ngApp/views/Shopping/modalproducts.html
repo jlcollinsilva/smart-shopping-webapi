@@ -1,0 +1,44 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">
+        <strong>{{modal.totalSupermarkets.superMarketName}}</strong>
+    </h3>
+        {{modal.supermarket.address1}}
+        {{modal.supermarket.city}}
+        {{modal.supermarket.state}}
+        {{modal.supermarket.zipCode}}
+   
+</div>
+
+<div class="modal-body">
+    <table class="table table-striped table-hover table-responsive">
+        <thead>
+            <tr>
+                <td>Qty</td>
+                <td>Product</td>
+                <td>Price</td>
+            </tr>
+        </thead>
+        <tr ng-repeat="pl in modal.totalSupermarkets.productsList | orderBy : 'productName' track by $index">
+            <td>{{pl.productQty}}</td>
+            <td>{{pl.productName}}</td>
+            <td>{{pl.productValue | currency}}</td>
+        </tr>
+        <tfoot>
+            <tr>
+                <td>{{modal.totalSupermarkets.totalItems}} Product(s)</td>
+                <td>Total Cost:</td>
+                <td>{{modal.totalSupermarkets.totalPrice | currency}}</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<div class="modal-footer footerDetail">
+    <div ng-hide="modal.isSent">
+        <sm-button ng-click="modal.sendToSupermarket()" class="sm-raised btn btn-primary">Submit</sm-button>
+        <sm-button ng-click="modal.closeDialog()" class="sm-raised btn btn-warning">Close</sm-button>
+    </div>
+    <div ng-show="modal.isSent">
+        <span>Great!!! {{account.getUserName()}} your order have been sent to {{modal.totalSupermarkets.superMarketName}} , thanks for your bussines!! </span>
+        <sm-button ng-click="modal.closeDialog()" class="btn-success sm-raised btn"> Ok</sm-button>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+﻿<h3>New Shopping List</h3> 
+<ul>
+    <li ng-repeat="err in controller.validationErrors track by $index" class="usrError">
+        {{err}}
+    </li>
+</ul>
+<form name="shoppForm" ng-submit="controller.save()" class="form-group">
+    <div>
+        <label>Name: </label>
+        <input name="name" type="text"  ng-model="controller.shoppinglist.name" class="form-control" placeholder="Enter a Name for the List" required/>
+        <span ng-show="shoppForm.name.$touched && shoppForm.name.$error.required" class="error">
+            Name of the List is required.
+        </span>
+    </div>
+    <div>
+        <label>Purchase Date: </label>
+        <input name="datelist" type="date"  ng-model="controller.shoppinglist.datelist" class="form-control" placeholder="Enter a Planning Date for Shopping"/>
+    </div>
+    <div>
+        <input ng-show="false" ng-model="controller.shoppinglist.username" class="form-control" readonly/>
+    </div>
+    <hr />
+    <div>
+        <input type="submit" value="Add" class="btn-primary btn" />
+        <input type="button" value="Cancel" class="btn-default btn" ng-click="controller.cancelForm()" />
+    </div>
+
+</form>

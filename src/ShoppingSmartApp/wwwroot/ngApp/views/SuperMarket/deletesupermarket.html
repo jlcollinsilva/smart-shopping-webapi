@@ -1,0 +1,30 @@
+﻿<h4>
+    Deleting SuperMarket: <strong>{{controller.supermarket.name}} - {{controller.supermarket.city}} - {{controller.supermarket.state}}</strong>
+</h4>
+
+<form class="form-group">
+
+    <div>
+        <label>Address:</label>
+        <input ng-model="controller.supermarket.address1" class="form-control" readonly />
+    </div>
+
+    <div>
+        <label>City:</label>
+        <input ng-model="controller.supermarket.city" class="form-control" readonly/>
+    </div>
+
+    <div>
+        <label>State:</label>
+        <select name="repeatSelect" id="repeatSelect" ng-model="controller.supermarket.state" class="form-control" placeholder="Select a State">
+            <option ng-repeat="option in controller.states track by option.abbreviation" value="{{option.abbreviation}}">{{option.name}}</option>
+        </select>
+    </div>
+    <div>
+        <label>Zip Code:</label>
+        <input ng-model="controller.supermarket.zipCode" class="form-control" readonly/>
+    </div>
+    <hr />
+    <input type="button" value="Delete" class="btn-danger btn" ng-click="controller.delete(controller.supermarket.id)"/>
+    <input type="button" value="Cancel" class="btn-default btn" ng-click="controller.cancelForm()" />
+</form>

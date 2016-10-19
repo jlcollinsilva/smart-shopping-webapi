@@ -1,0 +1,51 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">Enter information for : <strong>{{modal.productname}}</strong> in Shopping List:<strong> {{modal.shoppinglistname}}</strong> </h4>
+
+    <ul>
+        <li ng-repeat="error in modal.validationErrors track by $index" class="usrError">
+            {{error}}
+        </li>
+    </ul>
+
+</div>
+<form name="productForm" class="form-group">
+    <div class="modal-body">
+
+        <input ng-show="false" ng-model="modal.shoppingproduct.shoppinglistid" />
+        <input ng-show="false" ng-model="modal.shoppingproduct.productid" />
+        <div class="row">
+            <div class="col-xs-4">
+                <label>Quantity: </label>
+                <input ng-pattern="/^(?:[1-9][0-9]{0,5})$/" name="qty"  type="number" ng-model="modal.shoppingproduct.quantity" class="form-control" placeholder="Enter a Quantity" required />
+                <span ng-show="productForm.qty.$touched && productForm.qty.$error.required" class="error">
+                    Quantity is required.
+                </span>
+                <span ng-show="productForm.qty.$touched && productForm.qty.$error.pattern" class="error">
+                    Quantity must be between 1 and 1,000,000
+                </span>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-xs-4">
+
+                <label>It Is a Priority?</label>
+                <br />
+                
+                <input id="trueP" class="form-inline" type="radio" ng-model="modal.shoppingproduct.priority" ng-value="true" />
+                <label for="trueP">Yes</label><br />
+
+                <input id="falseP" class="form-inline" type="radio" ng-model="modal.shoppingproduct.priority" ng-value="false" />
+                <label for="falseP">No</label>
+            </div>
+        </div>
+        </div>
+
+    <div class="modal-footer footerDetail">
+
+
+        <sm-button ng-click="modal.save()" class="sm-raised btn btn-primary">Save</sm-button>
+        <sm-button ng-click="modal.closeDialog()" class="sm-raised btn btn-warning">Close</sm-button>
+
+    </div>
+</form>

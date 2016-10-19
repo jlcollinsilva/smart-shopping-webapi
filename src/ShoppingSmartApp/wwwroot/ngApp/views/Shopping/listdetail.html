@@ -1,0 +1,30 @@
+﻿<div class="row">
+    <h4 class="col-sm-5">My Shopping List: <strong>{{controller.shoppinglist.name}} </strong> </h4>
+</div>
+<hr />
+<div class="inner-addon left-addon">
+    <i class="glyphicon glyphicon-search"></i>
+    <input type="text" class="form-control" ng-model="searchText" ng-model-options="{debounce:1000}" placeholder="Search" />
+</div>
+<br />
+    Need add more products? <a ng-click="controller.goAddProductToList(controller.shoppinglist.id)" class="btn-primary btn btn-sm"><span class="glyphicon glyphicon-plus"></span> Add Products</a>
+
+<hr />
+
+<table class="table table-striped table-hover table-responsive">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Quantity</td>
+            <td>Actions</td>
+        </tr>
+    </thead>
+    <tr ng-repeat="p in controller.shoppingproducts |filter:{productName:searchText}">
+        <td>{{p.productName}}</td>
+        <td>{{p.productQty}}</td>
+        <td>
+            <a ng-click="controller.deleteShoppingProduct(p.shoppingProductId)"
+               class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+        </td>
+    </tr>
+</table>

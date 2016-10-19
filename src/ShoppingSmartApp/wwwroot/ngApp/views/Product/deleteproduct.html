@@ -1,0 +1,23 @@
+﻿<div>
+    <h3>Deleting Product: <strong>{{controller.product.name}}</strong> </h3>
+</div>
+<ul>
+    <li ng-repeat="error in controller.validationErrors track by $index" class="usrError">
+        {{error}}
+    </li>
+</ul>
+<form class="form-group">
+
+    <div>
+        <label>Description:</label>
+        <textarea rows="4" cols="50" ng-model="controller.product.description" class="form-control" readonly></textarea>
+    </div>
+
+    <div>       
+        <label>Unit:</label>
+        <input ng-model="controller.product.unit" class="form-control" type="text" readonly />
+    </div>
+<hr />  
+        <button type="submit" value="Delete" class="btn btn-danger" ng-click="controller.delete(controller.product.id)">Delete</button>
+        <button type="button" value="Cancel" class="btn btn-default" ng-click="controller.cancelForm()" >Cancel</button>   
+</form>

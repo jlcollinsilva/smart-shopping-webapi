@@ -1,0 +1,32 @@
+﻿<div class="row">
+    <h3 class="col-lg-5">List of Products</h3>
+
+    Need create a new Product? <a ng-click="controller.goAddProduct()" class="btn-primary btn btn-sm"><span class="glyphicon glyphicon-plus"></span> New</a>
+</div>
+
+<div class="inner-addon left-addon">
+    <i class="glyphicon glyphicon-search"></i>
+    <input type="text" class="form-control" ng-model="searchText" ng-model-options="{debounce:1000}" placeholder="Search" />
+</div>             
+
+<hr />
+
+<table class="table table-striped table-hover table-responsive">
+    <thead>
+        <tr>
+            <td class="thead">Name</td>
+            <td>Unit</td>
+            <td>Actions</td>
+        </tr>
+    </thead>
+    <tr ng-repeat="product in controller.products |filter:{name:searchText}">
+        <td>{{product.name}}</td>
+        <td>{{product.unit}}</td>
+        <td>
+            <a ng-click="controller.goEditProduct(product.id)" class="btn btn-sm btn-success"> <span class="glyphicon glyphicon-pencil"></span> Edit</a>
+            <a ng-click="controller.goDeleteProduct(product.id)" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+        </td>
+    </tr>
+</table>
+
+

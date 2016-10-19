@@ -1,0 +1,44 @@
+﻿<h4>
+    Editing SuperMarket: <strong>{{controller.supermarket.name}} - {{controller.supermarket.city}} - {{controller.supermarket.state}} </strong>
+</h4>
+
+<ul>
+    <li ng-repeat="error in controller.validationErrors track by $index" class="usrError">
+        {{error}}
+    </li>
+</ul>
+
+<form name = "supermarket" ng-submit="controller.save()" class="form-group">
+
+    <div>
+        <label>Address:</label>
+        <input ng-model="controller.supermarket.address1" class="form-control"/>
+    </div>
+
+    <div>
+        <label>City:</label>
+        <input ng-model="controller.supermarket.city" class="form-control"/>
+    </div>
+
+    <div>
+        <label>State:</label>
+        <select name="repeatSelect" id="repeatSelect" ng-model="controller.supermarket.state" class="form-control" placeholder="Select a State">
+            <option ng-repeat="option in controller.states track by option.abbreviation" value="{{option.abbreviation}}">{{option.name}}</option>
+        </select>
+    </div>
+    <div>
+        <label>Zip Code:</label>
+        <input uib-tooltip="Very Important! , used for to match with the Consumer shopping request" name="zipcode" pattern="\d{5}" ng-model="controller.supermarket.zipCode" class="form-control" required/>
+        <span ng-show="supermarket.zipcode.$touched && supermarket.zipcode.$error.required" class="error">
+            Zip Code is required.
+        </span>
+        <span ng-show="supermarket.zipcode.$touched && supermarket.zipcode.$error.pattern" class="error">
+            Must enter 5 valid numerics digits corresponding to a valid US Zip Code.
+        </span>
+    </div>
+    <hr />
+    <div>
+        <input type="submit" value="Save" class="btn-primary btn" ng-disabled="supermarket.$invalid"/>
+        <input type="button" value="Cancel" class="btn-default btn" ng-click="controller.cancelForm()" />
+    </div>
+</form>

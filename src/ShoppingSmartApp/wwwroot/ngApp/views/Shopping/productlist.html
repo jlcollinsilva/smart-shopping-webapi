@@ -1,0 +1,29 @@
+﻿<div class="row">
+    <h4 class="col-sm-5">Add Products to My Shopping List: <a href="#" ng-click="controller.goListDetail(controller.shoppinglist.id)"><strong>{{controller.shoppinglist.name}} </strong></a> </h4>
+</div>
+<hr />
+<div class="inner-addon left-addon">
+    <i class="glyphicon glyphicon-search"></i>
+    <input type="text" class="form-control" ng-model="searchText" ng-model-options="{debounce:1000}" placeholder="Search" />
+</div>
+
+<hr />
+
+<table class="table table-striped table-hover table-responsive">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Unit</td>
+            <td>Actions</td>
+        </tr>
+    </thead>
+    <tr ng-repeat="product in controller.products |filter:{name:searchText}">
+        {{product}}
+        <td>{{product.name}}</td>
+        <td>{{product.unit}}</td>
+        <td>
+            <a ng-click="controller.addToShoppingList(controller.shoppinglist.id,controller.shoppinglist.name,product.id,product.name)"
+               class="btn btn-sm btn-info"><span class="glyphicon glyphicon-list-alt"></span> Add To List</a>
+        </td>
+    </tr>
+</table>

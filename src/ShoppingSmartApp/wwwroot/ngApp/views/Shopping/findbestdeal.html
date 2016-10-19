@@ -1,0 +1,45 @@
+﻿<form name="dealform" class="form-inline">
+    <div class="form-group">
+        <div>
+          <h4>  Shopping List:  <strong>{{controller.listData.name}}</strong> </h4>
+            
+        </div>
+        <Label>Enter your current location Zip Code for to find the SuperMarkets </Label>
+        
+        <input uib-tooltip="Very Important! , used for to match with the Supermarkets location"  type="text"  name="zipcode" pattern="\d{5}" ng-model="controller.zipcodeToSearch" class="form-control" placeholder="Enter Zipcode, ex. 77494" required />
+        
+        <button ng-click="controller.finddeal(controller.listData.id,controller.zipcodeToSearch)" class="btn btn-primary">
+            <span class="glyphicon glyphicon-arrow-right"></span> Go!
+        </button>
+    </div>
+    <div>
+        <span ng-show="dealform.zipcode.$touched && dealform.zipcode.$error.required" class="error">
+            Zip Code is required.
+        </span>
+        <span ng-show="dealform.zipcode.$touched && dealform.zipcode.$error.pattern" class="error">
+            Must enter 5 valid numerics digits corresponding to a valid Zip Code.
+        </span>
+    </div>
+</form>
+<hr />
+<h4 ng-show="controller.noResult">Sorry there are Not SuperMarkets Available in this zone for your Shopping List....:</h4>
+<h4 ng-show="controller.isGo && !controller.noResult">Your best SuperMarkets Deals Available in this zone are....:</h4>
+<table ng-show="controller.isGo && !controller.noResult" class="table table-striped table-hover table-responsive">
+    <thead>
+        <tr>
+            <td>SuperMarket</td>
+            <td>Total Items</td>
+            <td>Total Cost</td>
+            <td>Actions</td>
+        </tr>
+    </thead>
+    <tr ng-repeat="dl in controller.totalSupermarkets | orderBy : ['-totalItems','totalPrice'] track by $index">
+        <td>{{dl.superMarketName}}</td>
+        <td>{{dl.totalItems}}</td>
+        <td>{{dl.totalPrice | currency}}</td>
+        <td>
+            <a ng-click="controller.showProducts(dl.superMarketId)" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-thumbs-up"></span> Select</a>
+        </td>
+    </tr>
+</table>
+

@@ -1,0 +1,27 @@
+<fieldset>
+    <legend>Login </legend>
+    <ul>
+        <li ng-repeat="error in controller.validationMessages">
+            {{error}}
+        </li>
+    </ul>
+    <form ng-submit="controller.login()" class="form-group">
+        <div>
+            <label>Email:</label>
+            <div class="inner-addon left-addon">
+                <i class="glyphicon glyphicon-envelope"></i>
+                <input type="text" ng-model="controller.loginUser.email" class="form-control" placeholder="Enter your email address"/>
+            </div>   
+        </div>
+        <div>
+            <label>Password:</label>
+            <div class="inner-addon left-addon">
+                <i class="glyphicon glyphicon-lock"></i>
+                <input ng-model="controller.loginUser.password" type="password" class="form-control" placeholder="Enter your password" />
+            </div>
+        </div>
+        <hr />
+        <input type="submit" value="Login" class="btn btn-primary"/>
+        <a href="/register">Register</a>
+    </form>
+</fieldset>

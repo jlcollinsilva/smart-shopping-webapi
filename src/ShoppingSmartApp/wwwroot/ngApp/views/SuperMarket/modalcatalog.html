@@ -1,0 +1,39 @@
+﻿    <div class="modal-header">
+        <div class="modal-title">Product: <strong>{{modal.productname}}</strong> in Catalog of:<strong> {{modal.supermarketname}}</strong> </div>
+        <ul>
+            <li ng-repeat="error in modal.validationErrors track by $index" class="usrError">
+                {{error}}
+            </li>
+        </ul>
+    </div>
+    <form name="catalogForm">
+        <div class="modal-body">
+            <input ng-show="false" ng-model="modal.productcatalog.supermarketid" />
+            <input ng-show="false" ng-model="modal.productcatalog.productid" />
+               <div>   
+                   <label> Unit Price: </label>
+                   <div class="inner-addon left-addon">
+                       <i class="glyphicon glyphicon-usd"></i>
+                       <input ng-pattern="/^[0-9]{1,5}(\.[0-9]{1,2})?$/" min="0" name="unitprice" type="number" ng-model="modal.productcatalog.unitprice" class="form-control" placeholder="Enter Unit Price" required />
+                    </div>
+                       <span ng-show="catalogForm.unitprice.$touched && catalogForm.unitprice.$error.required" class="error">
+                           Unit Price is required.
+                       </span>
+                       <span ng-show="catalogForm.unitprice.$touched && catalogForm.unitprice.$error.pattern" class="error">
+                           Unit Price must be numeric, until 2 decimals places and betwwen 0.01 and 9,999,999.99
+                       </span>
+                   </div>
+            <div>
+                <label> Comment: </label>
+                <textarea rows="4" cols="50" name="comment" type="text" ng-maxlength="250" ng-model="modal.productcatalog.comment" class="form-control" placeholder="Enter any additional information" /></textarea>
+                <span ng-show="catalogForm.comment.$touched && catalogForm.comment.$error.maxlength" class="error">
+                    Comment longitud must be until 250 characters.
+                </span>
+            </div>
+        </div>
+
+        <div class="modal-footer footerDetail">
+            <sm-button ng-click="modal.save()" class="sm-raised btn btn-primary">Save</sm-button>
+            <sm-button ng-click="modal.closeDialog()" class="sm-raised btn btn-default">Close</sm-button>
+        </div>
+    </form>

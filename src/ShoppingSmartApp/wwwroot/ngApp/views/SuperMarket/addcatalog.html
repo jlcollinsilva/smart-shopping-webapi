@@ -1,0 +1,29 @@
+﻿<div class="row">
+    <h4 class="col-sm-5">Add Products to Catalog for: <a href="#" ng-click="controller.goCatalog(controller.supermarket.id)"><strong>{{controller.supermarket.name}} </strong></a> </h4>
+</div>
+<hr />
+<div class="inner-addon left-addon">
+    <i class="glyphicon glyphicon-search"></i>
+    <input type="text" class="form-control" ng-model="searchText" ng-model-options="{debounce:1000}" placeholder="Search" />
+</div>
+
+<hr />
+
+<table class="table table-striped table-hover table-responsive">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Unit</td>
+            <td>Actions</td>
+        </tr>
+    </thead>
+    <tr ng-repeat="product in controller.products |filter:{name:searchText}">
+        {{product}}
+        <td>{{product.name}}</td>
+        <td>{{product.unit}}</td>
+        <td>
+            <a ng-click="controller.addToCatalog(controller.supermarket.id,controller.supermarket.name,product.id,product.name)"
+               class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-list-alt"></span> Add To Catalog</a>
+        </td>
+    </tr>
+</table>
